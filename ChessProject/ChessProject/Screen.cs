@@ -50,6 +50,7 @@ namespace ChessProject
         public static ChessPosition ReadPlayerInput()
         {
             string s = Console.ReadLine();
+            
             char column = s[0];
             int line = int.Parse(s[1] + "");
             return new ChessPosition(column, line);
@@ -62,6 +63,8 @@ namespace ChessProject
             Console.WriteLine();
             Console.WriteLine("Shift: "+game.Shift);
             Console.WriteLine("Waiting move: "+game.CurrentPlayer);
+            if(game.GameInCheck)
+                Console.WriteLine("Check!");
         }
         public static void PrintCapturedPieces(ChessGame game)
         {

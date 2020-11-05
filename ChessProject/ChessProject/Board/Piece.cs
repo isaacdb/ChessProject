@@ -17,6 +17,10 @@
         {
             QnttMovies++;
         }
+        public void DecrementQnttMovies()
+        {
+            QnttMovies--;
+        }
         public bool ExistPossibleMovies()
         {
             bool[,] mat = PossibleMoviments();

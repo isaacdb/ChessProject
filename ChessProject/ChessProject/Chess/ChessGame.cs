@@ -9,8 +9,10 @@ namespace ChessProject.Chess
         public int Shift { get; private set; }
         public Color CurrentPlayer { get; private set; }
         public bool Finished { get; private set; }
-        public HashSet<Piece> FreePieces { get;  private set; }
+        public HashSet<Piece> FreePieces { get; private set; }
         public HashSet<Piece> CapturedPieces { get; set; }
+
+        public bool GameInCheck { get; set; }
 
         public ChessGame()
         {
@@ -24,14 +26,31 @@ namespace ChessProject.Chess
         }
         public void PerformsMove(Position origin, Position destiny)
         {
-            RunMoviment(origin, destiny);
+            Piece captPiece = RunMoviment(origin, destiny);
+            if (OnCheck(CurrentPlayer))
+            {
+                UndoMoviment(origin, destiny, captPiece);
+                throw new BoardException("You can't put yourself in check");
+            }
+            if (OnCheck(adversary(CurrentPlayer)))
+                GameInCheck = true;
+            else
+                GameInCheck = false;
+
             Shift++;
             ChangePlayer();
 
         }
+        private Color adversary(Color color)
+        {
+            if (color == Color.Branca)
+                return Color.Preta;
+            else
+                return Color.Branca;
+        }
         public void ValidateOriginPosition(Position pos)
         {
-            if(ChessBoard.PiecePosition(pos) == null)
+            if (ChessBoard.PiecePosition(pos) == null)
             {
                 throw new BoardException("Dont have piece in the chosed position");
             }
@@ -56,7 +75,18 @@ namespace ChessProject.Chess
             else
                 CurrentPlayer = Color.Branca;
         }
-        public void RunMoviment(Position origin, Position destiny)
+        public void UndoMoviment(Position origin, Position destiny, Piece captPiece)
+        {
+            Piece p = ChessBoard.RemovePiece(destiny);
+            p.DecrementQnttMovies();
+            if (captPiece != null)
+            {
+                ChessBoard.InsertPiece(captPiece, destiny);
+                CapturedPieces.Remove(captPiece);
+            }
+            ChessBoard.InsertPiece(p, origin);
+        }
+        public Piece RunMoviment(Position origin, Position destiny)
         {
             Piece p = ChessBoard.RemovePiece(origin);
             p.IncrementQnttMovies();
@@ -64,11 +94,13 @@ namespace ChessProject.Chess
             ChessBoard.InsertPiece(p, destiny);
             if (CapturedPiece != null)
                 CapturedPieces.Add(CapturedPiece);
+
+            return CapturedPiece;
         }
         public HashSet<Piece> PieceCaptureds(Color color)
         {
             HashSet<Piece> aux = new HashSet<Piece>();
-            foreach(Piece x in CapturedPieces)
+            foreach (Piece x in CapturedPieces)
             {
                 if (x.Color == color)
                     aux.Add(x);
@@ -90,12 +122,37 @@ namespace ChessProject.Chess
         public void PutNewPiece(char column, int line, Piece piec)
         {
             ChessBoard.InsertPiece(piec, new ChessPosition(column, line).toPosition());
-
+            FreePieces.Add(piec);
         }
         public void PutPieces()
         {
-            PutNewPiece('c',1,new Tower( ChessBoard,Color.Branca));
-            PutNewPiece('c',7,new King( ChessBoard,Color.Preta));
+            PutNewPiece('c', 1, new Tower(ChessBoard, Color.Branca));
+            PutNewPiece('c', 7, new King(ChessBoard, Color.Preta));
+            PutNewPiece('h', 7, new King(ChessBoard, Color.Branca));
+        }
+        private Piece King(Color color)
+        {
+            foreach (Piece x in PiecesOnGame(color))
+            {
+                if (x is King)
+                {
+                    return x;
+                }
+            }
+            return null;
+        }
+        public bool OnCheck(Color color)
+        {
+            Piece k = King(color);
+            if (k == null)
+                throw new BoardException("Dont have a " + color + " king on the board!");
+            foreach (Piece x in PiecesOnGame(adversary(color)))
+            {
+                bool[,] mat = x.PossibleMoviments();
+                if (mat[k.Position.Line, k.Position.Column])
+                    return true;
+            }
+            return false;
         }
     }
 }
