@@ -1,4 +1,5 @@
 ﻿using ChessProject.Board;
+using Microsoft.VisualBasic;
 using System.Collections.Generic;
 
 namespace ChessProject.Chess
@@ -37,9 +38,15 @@ namespace ChessProject.Chess
             else
                 GameInCheck = false;
 
-            Shift++;
-            ChangePlayer();
-
+            if (TestCheckMate(adversary(CurrentPlayer)))
+            {
+                Finished = true;
+            }
+            else
+            {
+                Shift++;
+                ChangePlayer();
+            }
         }
         private Color adversary(Color color)
         {
@@ -140,6 +147,34 @@ namespace ChessProject.Chess
                 }
             }
             return null;
+        }
+        public bool TestCheckMate(Color color)
+        {
+            if (!OnCheck(color))
+                return false;
+
+            foreach (Piece x in PiecesOnGame(color))
+            {
+                bool[,] mat = x.PossibleMoviments();
+                for (int i = 0; i < ChessBoard.Lines; i++)
+                {
+                    for (int j = 0; j < ChessBoard.Columns; j++)
+                    {
+                        if (mat[i, j])
+                        {
+                            Position destino = new Position(i, j);
+                            Piece pieceCpt = RunMoviment(x.Position, destino);
+                            bool testCheck = OnCheck(color);
+                            UndoMoviment(x.Position, destino, pieceCpt);
+                            if (!testCheck)
+                            {
+                                return false;
+                            }
+                        }
+                    }
+                }
+            }
+            return true;
         }
         public bool OnCheck(Color color)
         {
