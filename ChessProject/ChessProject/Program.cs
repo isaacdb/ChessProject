@@ -17,12 +17,7 @@ namespace ChessProject
                     try
                     {
                         Console.Clear();
-                        Screen.BoardImpress(game.ChessBoard);
-                        Console.WriteLine();
-                        Console.WriteLine("Shift: " + game.Shift);
-                        Console.WriteLine("Waiting move: " + game.CurrentPlayer);
-
-                        Console.WriteLine();
+                        Screen.PrintGame(game);
 
                         Console.Write("Origin: ");
                         Position origin = Screen.ReadPlayerInput().toPosition();

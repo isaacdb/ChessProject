@@ -1,6 +1,7 @@
 ﻿using ChessProject.Board;
 using ChessProject.Chess;
 using System;
+using System.Collections.Generic;
 
 namespace ChessProject
 {
@@ -52,6 +53,39 @@ namespace ChessProject
             char column = s[0];
             int line = int.Parse(s[1] + "");
             return new ChessPosition(column, line);
+        }
+        public static void PrintGame(ChessGame game)
+        {
+            BoardImpress(game.ChessBoard);
+            Console.WriteLine();
+            PrintCapturedPieces(game);
+            Console.WriteLine();
+            Console.WriteLine("Shift: "+game.Shift);
+            Console.WriteLine("Waiting move: "+game.CurrentPlayer);
+        }
+        public static void PrintCapturedPieces(ChessGame game)
+        {
+            Console.WriteLine("Captured pieces: ");
+            Console.Write("White: ");
+            PrintSet(game.PieceCaptureds(Color.Branca));
+            Console.WriteLine();
+            Console.Write("Black: ");
+            ConsoleColor aux = Console.ForegroundColor;
+            Console.ForegroundColor = ConsoleColor.Blue;
+            PrintSet(game.PieceCaptureds(Color.Preta));
+            Console.ForegroundColor = aux;
+            Console.WriteLine();
+
+        }
+        public static void PrintSet(HashSet<Piece> set)
+        {
+            Console.Write("[");
+            foreach(Piece x in set)
+            {
+                Console.Write(x + " ");
+            }
+            Console.Write("]");
+            Console.WriteLine();
         }
         public static void PieceImpress(Piece piec)
         {

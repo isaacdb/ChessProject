@@ -1,5 +1,6 @@
 ﻿using ChessProject.Board;
-using System;
+using System.Collections.Generic;
+
 namespace ChessProject.Chess
 {
     class ChessGame
@@ -8,6 +9,8 @@ namespace ChessProject.Chess
         public int Shift { get; private set; }
         public Color CurrentPlayer { get; private set; }
         public bool Finished { get; private set; }
+        public HashSet<Piece> FreePieces { get;  private set; }
+        public HashSet<Piece> CapturedPieces { get; set; }
 
         public ChessGame()
         {
@@ -15,6 +18,8 @@ namespace ChessProject.Chess
             Shift = 1;
             CurrentPlayer = Color.Branca;
             Finished = false;
+            FreePieces = new HashSet<Piece>();
+            CapturedPieces = new HashSet<Piece>();
             PutPieces();
         }
         public void PerformsMove(Position origin, Position destiny)
@@ -57,11 +62,40 @@ namespace ChessProject.Chess
             p.IncrementQnttMovies();
             Piece CapturedPiece = ChessBoard.RemovePiece(destiny);
             ChessBoard.InsertPiece(p, destiny);
+            if (CapturedPiece != null)
+                CapturedPieces.Add(CapturedPiece);
+        }
+        public HashSet<Piece> PieceCaptureds(Color color)
+        {
+            HashSet<Piece> aux = new HashSet<Piece>();
+            foreach(Piece x in CapturedPieces)
+            {
+                if (x.Color == color)
+                    aux.Add(x);
+            }
+            return aux;
+        }
+        public HashSet<Piece> PiecesOnGame(Color color)
+        {
+            HashSet<Piece> aux = new HashSet<Piece>();
+            foreach (Piece x in FreePieces)
+            {
+                if (x.Color == color)
+                    aux.Add(x);
+            }
+            aux.ExceptWith(PieceCaptureds(color));
+            return aux;
+
+        }
+        public void PutNewPiece(char column, int line, Piece piec)
+        {
+            ChessBoard.InsertPiece(piec, new ChessPosition(column, line).toPosition());
+
         }
         public void PutPieces()
         {
-            ChessBoard.InsertPiece(new Tower(ChessBoard, Color.Branca), new ChessPosition('c', 1).toPosition());
-            ChessBoard.InsertPiece(new King(ChessBoard, Color.Preta), new ChessPosition('c', 8).toPosition());
+            PutNewPiece('c',1,new Tower( ChessBoard,Color.Branca));
+            PutNewPiece('c',7,new King( ChessBoard,Color.Preta));
         }
     }
 }
