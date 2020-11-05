@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ChessProject.Board;
+using System;
 
 namespace ChessProject
 {
@@ -6,7 +7,10 @@ namespace ChessProject
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+
+            Position p;
+            p = new Position(3,4);
+            Console.WriteLine(p);
         }
     }
 }
