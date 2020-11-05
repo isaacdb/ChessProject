@@ -8,15 +8,29 @@ namespace ChessProject
     {
         static void Main(string[] args)
         {
+            try
+            {
+                ChessGame game = new ChessGame();
+                while (!game.Finished)
+                {
+                    Console.Clear();
+                    Screen.BoardImpress(game.ChessBoard);
 
-            ChessBoard chessBoard = new ChessBoard(8, 8);
+                    Console.Write("Origem: ");
+                    Position origin = Screen.ReadPlayerInput().toPosition();
 
-            chessBoard.InsertPiece(new King(chessBoard, Color.Preta), new Position(1, 3));
-            chessBoard.InsertPiece(new Tower(chessBoard, Color.Branca), new Position(0, 3));
-            chessBoard.InsertPiece(new King(chessBoard, Color.Preta), new Position(7, 7));
-            chessBoard.InsertPiece(new Tower(chessBoard, Color.Branca), new Position(1, 6));
+                    Console.Write("Destino: ");
+                    Position destiny = Screen.ReadPlayerInput().toPosition();
 
-            Screen.BoardImpress(chessBoard);
+                    game.RunMoviment(origin, destiny);
+
+                }
+            }
+            catch(BoardException e)
+            {
+                Console.WriteLine(e.Message);
+            }
+
         }
     }
 }

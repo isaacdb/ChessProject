@@ -13,5 +13,9 @@
             Color = color;
             ChessBoard = chessBoard;
         }
+        public void IncrementQnttMovies()
+        {
+            QnttMovies++;
+        }
     }
 }
