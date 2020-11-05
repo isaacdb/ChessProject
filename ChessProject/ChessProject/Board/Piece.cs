@@ -7,9 +7,9 @@
         public int QnttMovies { get; protected set; }
         public ChessBoard ChessBoard { get; protected set; }
 
-        public Piece(Position position, Color color, ChessBoard chessBoard)
+        public Piece(Color color, ChessBoard chessBoard)
         {
-            Position = position;
+          //  Position = null;
             Color = color;
             ChessBoard = chessBoard;
         }

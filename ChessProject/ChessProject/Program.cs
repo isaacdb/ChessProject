@@ -1,4 +1,5 @@
 ﻿using ChessProject.Board;
+using ChessProject.Chess;
 using System;
 
 namespace ChessProject
@@ -9,6 +10,8 @@ namespace ChessProject
         {
 
             ChessBoard chessBoard = new ChessBoard(8, 8);
+
+            chessBoard.InsertPiece(new King(chessBoard, Color.Preta), new Position(1, 3));
 
             Screen.BoardImpress(chessBoard);
         }
