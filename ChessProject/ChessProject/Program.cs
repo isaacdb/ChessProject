@@ -8,9 +8,9 @@ namespace ChessProject
         static void Main(string[] args)
         {
 
-            Position p;
-            p = new Position(3,4);
-            Console.WriteLine(p);
+            ChessBoard chessBoard = new ChessBoard(8, 8);
+
+            Screen.BoardImpress(chessBoard);
         }
     }
 }

@@ -1,16 +1,20 @@
 ﻿namespace ChessProject.Board
 {
-    class Board
+    class ChessBoard
     {
         public int Lines { get; set; }
         public int Columns { get; set; }
-        public Piece[,] Pieces { get; set; }
+        public Piece[,] Pieces { get; private set; }
 
-        public Board(int lines, int columns)
+        public ChessBoard(int lines, int columns)
         {
             Lines = lines;
             Columns = columns;
             Pieces = new Piece[Lines, Columns];
+        }
+        public Piece PiecePositon(int line, int column)
+        {
+            return Pieces[line, column];
         }
     }
 }

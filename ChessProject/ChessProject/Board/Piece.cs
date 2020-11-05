@@ -5,13 +5,13 @@
         public Position Position { get; set; }
         public Color Color { get; protected set; }
         public int QnttMovies { get; protected set; }
-        public Board Board { get; protected set; }
+        public ChessBoard ChessBoard { get; protected set; }
 
-        public Piece(Position position, Color color, Board board)
+        public Piece(Position position, Color color, ChessBoard chessBoard)
         {
             Position = position;
             Color = color;
-            Board = board;
+            ChessBoard = chessBoard;
         }
     }
 }
