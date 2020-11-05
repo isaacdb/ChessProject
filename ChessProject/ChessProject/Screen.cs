@@ -13,18 +13,39 @@ namespace ChessProject
                 Console.Write(8 - i + " ");
                 for (int j = 0; j < chessBoard.Columns; j++)
                 {
-                    if (chessBoard.PiecePositon(i, j) == null)
-                        Console.Write("- ");
-                    else
-                    {
-                        PieceImpress(chessBoard.PiecePositon(i, j));
-                        Console.Write(" ");
-                    }
+                    PieceImpress(chessBoard.PiecePositon(i, j));
                 }
                 Console.WriteLine();
             }
             Console.WriteLine("  a b c d e f g h");
         }
+        public static void BoardImpress(ChessBoard chessBoard, bool[,] possibleMoviments)
+        {
+            ConsoleColor originalBackground = Console.BackgroundColor;
+            ConsoleColor changedBackground = ConsoleColor.DarkGray;
+
+            for (int i = 0; i < chessBoard.Lines; i++)
+            {
+                Console.Write(8 - i + " ");
+                for (int j = 0; j < chessBoard.Columns; j++)
+                {
+                    if (possibleMoviments[i, j])
+                    {
+                        Console.BackgroundColor = changedBackground;
+                    }
+                    else
+                    {
+                        Console.BackgroundColor = originalBackground;
+                    }
+                    PieceImpress(chessBoard.PiecePositon(i, j));
+                    Console.BackgroundColor = originalBackground;
+                }
+                Console.WriteLine();
+            }
+            Console.WriteLine("  a b c d e f g h");
+            Console.BackgroundColor = originalBackground;
+        }
+
         public static ChessPosition ReadPlayerInput()
         {
             string s = Console.ReadLine();
@@ -34,14 +55,22 @@ namespace ChessProject
         }
         public static void PieceImpress(Piece piec)
         {
-            if (piec.Color == Color.Branca)
-                Console.Write(piec);
+            if (piec == null)
+            {
+                Console.Write("- ");
+            }
             else
             {
-                ConsoleColor aux = Console.ForegroundColor;
-                Console.ForegroundColor = ConsoleColor.Blue;
-                Console.Write(piec);
-                Console.ForegroundColor = aux;
+                if (piec.Color == Color.Branca)
+                    Console.Write(piec);
+                else
+                {
+                    ConsoleColor aux = Console.ForegroundColor;
+                    Console.ForegroundColor = ConsoleColor.Blue;
+                    Console.Write(piec);
+                    Console.ForegroundColor = aux;
+                }
+                Console.Write(" ");
             }
         }
     }

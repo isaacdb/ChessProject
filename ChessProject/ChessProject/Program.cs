@@ -15,10 +15,16 @@ namespace ChessProject
                 {
                     Console.Clear();
                     Screen.BoardImpress(game.ChessBoard);
-
+                    Console.WriteLine();
                     Console.Write("Origem: ");
                     Position origin = Screen.ReadPlayerInput().toPosition();
 
+                    bool[,] possiblePositions = game.ChessBoard.PiecePosition(origin).PossibleMoviments();
+
+                    Console.Clear();
+                    Screen.BoardImpress(game.ChessBoard, possiblePositions);
+                    
+                    Console.WriteLine();
                     Console.Write("Destino: ");
                     Position destiny = Screen.ReadPlayerInput().toPosition();
 
