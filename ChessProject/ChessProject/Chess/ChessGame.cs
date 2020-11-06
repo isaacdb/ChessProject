@@ -92,6 +92,26 @@ namespace ChessProject.Chess
                 CapturedPieces.Remove(captPiece);
             }
             ChessBoard.InsertPiece(p, origin);
+
+            //#jogada especial roque pequeno
+            if (p is King && destiny.Column == origin.Column + 2)
+            {
+                Position originT = new Position(origin.Line, origin.Column + 3);
+                Position destinyT = new Position(origin.Line, origin.Column + 1);
+                Piece T = ChessBoard.RemovePiece(destinyT);
+                T.DecrementQnttMovies();
+                ChessBoard.InsertPiece(T, originT);
+            }
+            //#jogada especial roque pequeno
+            if (p is King && destiny.Column == origin.Column - 2)
+            {
+                Position originT = new Position(origin.Line, origin.Column - 4);
+                Position destinyT = new Position(origin.Line, origin.Column - 1);
+                Piece T = ChessBoard.RemovePiece(destinyT);
+                T.DecrementQnttMovies();
+                ChessBoard.InsertPiece(T, originT);
+            }
+
         }
         public Piece RunMoviment(Position origin, Position destiny)
         {
@@ -101,6 +121,25 @@ namespace ChessProject.Chess
             ChessBoard.InsertPiece(p, destiny);
             if (CapturedPiece != null)
                 CapturedPieces.Add(CapturedPiece);
+
+            //#jogada especial roque pequeno
+            if(p is King && destiny.Column == origin.Column + 2)
+            {
+                Position originT = new Position(origin.Line, origin.Column + 3);
+                Position destinyT = new Position(origin.Line, origin.Column + 1);
+                Piece T = ChessBoard.RemovePiece(originT);
+                T.IncrementQnttMovies();
+                ChessBoard.InsertPiece(T, destinyT);
+            }
+            //#jogada especial roque Grande
+            if (p is King && destiny.Column == origin.Column - 2)
+            {
+                Position originT = new Position(origin.Line, origin.Column - 4);
+                Position destinyT = new Position(origin.Line, origin.Column - 1);
+                Piece T = ChessBoard.RemovePiece(originT);
+                T.IncrementQnttMovies();
+                ChessBoard.InsertPiece(T, destinyT);
+            }
 
             return CapturedPiece;
         }
@@ -133,14 +172,12 @@ namespace ChessProject.Chess
         }
         public void PutPieces()
         {
-            PutNewPiece('h', 7, new Tower(ChessBoard, Color.Branca));
-            PutNewPiece('c', 1, new Tower(ChessBoard, Color.Branca));
-            PutNewPiece('b', 8, new King(ChessBoard, Color.Preta));
-            PutNewPiece('b', 3, new Queen(ChessBoard, Color.Preta));
-            PutNewPiece('a', 5, new Horse(ChessBoard, Color.Preta));
-            PutNewPiece('d', 1, new King(ChessBoard, Color.Branca));
-            PutNewPiece('d', 7, new Pawn(ChessBoard, Color.Preta));
-            PutNewPiece('d', 2, new Pawn(ChessBoard, Color.Branca));
+            PutNewPiece('h', 8, new Tower(ChessBoard, Color.Preta));
+            PutNewPiece('a', 8, new Tower(ChessBoard, Color.Preta));
+            PutNewPiece('e', 8, new King(ChessBoard, Color.Preta,this));
+            PutNewPiece('e', 1, new King(ChessBoard, Color.Branca, this));
+            PutNewPiece('h', 1, new Tower(ChessBoard, Color.Branca));
+            PutNewPiece('a', 1, new Tower(ChessBoard, Color.Branca));
         }
         private Piece King(Color color)
         {
