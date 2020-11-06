@@ -224,22 +224,41 @@ namespace ChessProject.Chess
         }
         public void PutPieces()
         {
-            PutNewPiece('h', 8, new Tower(ChessBoard, Color.Preta));
-            PutNewPiece('a', 8, new Tower(ChessBoard, Color.Preta));
-            PutNewPiece('e', 8, new King(ChessBoard, Color.Preta, this));
-            PutNewPiece('e', 1, new King(ChessBoard, Color.Branca, this));
-            PutNewPiece('h', 1, new Tower(ChessBoard, Color.Branca));
             PutNewPiece('a', 1, new Tower(ChessBoard, Color.Branca));
+            PutNewPiece('b', 1, new Horse(ChessBoard, Color.Branca));
+            PutNewPiece('c', 1, new Bishop(ChessBoard, Color.Branca));
+            PutNewPiece('d', 1, new Queen(ChessBoard, Color.Branca));
+            PutNewPiece('e', 1, new King(ChessBoard, Color.Branca,this));
+            PutNewPiece('f', 1, new Bishop(ChessBoard, Color.Branca));
+            PutNewPiece('g', 1, new Horse(ChessBoard, Color.Branca));
+            PutNewPiece('h', 1, new Tower(ChessBoard, Color.Branca));
 
             PutNewPiece('a', 2, new Pawn(ChessBoard, Color.Branca, this));
             PutNewPiece('b', 2, new Pawn(ChessBoard, Color.Branca, this));
             PutNewPiece('c', 2, new Pawn(ChessBoard, Color.Branca, this));
             PutNewPiece('d', 2, new Pawn(ChessBoard, Color.Branca, this));
+            PutNewPiece('e', 2, new Pawn(ChessBoard, Color.Branca, this));
+            PutNewPiece('f', 2, new Pawn(ChessBoard, Color.Branca, this));
+            PutNewPiece('g', 2, new Pawn(ChessBoard, Color.Branca, this));
+            PutNewPiece('h', 2, new Pawn(ChessBoard, Color.Branca, this));
 
             PutNewPiece('a', 7, new Pawn(ChessBoard, Color.Preta, this));
             PutNewPiece('b', 7, new Pawn(ChessBoard, Color.Preta, this));
             PutNewPiece('c', 7, new Pawn(ChessBoard, Color.Preta, this));
             PutNewPiece('d', 7, new Pawn(ChessBoard, Color.Preta, this));
+            PutNewPiece('e', 7, new Pawn(ChessBoard, Color.Preta, this));
+            PutNewPiece('f', 7, new Pawn(ChessBoard, Color.Preta, this));
+            PutNewPiece('g', 7, new Pawn(ChessBoard, Color.Preta, this));
+            PutNewPiece('h', 7, new Pawn(ChessBoard, Color.Preta, this));
+
+            PutNewPiece('a', 8, new Tower(ChessBoard, Color.Preta));
+            PutNewPiece('b', 8, new Horse(ChessBoard, Color.Preta));
+            PutNewPiece('c', 8, new Bishop(ChessBoard, Color.Preta));
+            PutNewPiece('d', 8, new Queen(ChessBoard, Color.Preta));
+            PutNewPiece('e', 8, new King(ChessBoard, Color.Preta, this));
+            PutNewPiece('f', 8, new Bishop(ChessBoard, Color.Preta));
+            PutNewPiece('g', 8, new Horse(ChessBoard, Color.Preta));
+            PutNewPiece('h', 8, new Tower(ChessBoard, Color.Preta));
 
         }
         private Piece King(Color color)

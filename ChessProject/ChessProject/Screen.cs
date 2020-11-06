@@ -2,6 +2,7 @@
 using ChessProject.Chess;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace ChessProject
 {
@@ -50,11 +51,26 @@ namespace ChessProject
         public static ChessPosition ReadPlayerInput()
         {
             string s = Console.ReadLine();
-
-
+            ValidateInput(s);
             char column = s[0];
             int line = int.Parse(s[1] + "");
             return new ChessPosition(column, line);
+        }
+        public static void ValidateInput(string input)
+        {
+            if (!input.Length.Equals(2))
+                throw new BoardException("Insert a valid position.");
+
+            List<char> letters = new List<char> { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h' };
+            List<int> numbers = new List<int> { '1', '2', '3', '4', '5', '6', '7', '8' };
+
+            var newletter = letters.FirstOrDefault(l => l.Equals(input[0]));
+            if (newletter.Equals('\0'))
+                throw new BoardException("Insert a valid position.");
+
+            var newNumb = numbers.FirstOrDefault(n => n.Equals(input[1]));
+            if (newNumb.Equals('\0'))
+                throw new BoardException("Insert a valid position.");
         }
         public static void PrintGame(ChessGame game)
         {
@@ -72,7 +88,7 @@ namespace ChessProject
             else
             {
                 Console.WriteLine("XEQUEMATE!");
-                Console.WriteLine("Winner: "+game.CurrentPlayer);
+                Console.WriteLine("Winner: " + game.CurrentPlayer);
             }
         }
         public static void PrintCapturedPieces(ChessGame game)
