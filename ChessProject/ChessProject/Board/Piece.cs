@@ -13,6 +13,13 @@
             Color = color;
             ChessBoard = chessBoard;
         }
+
+        protected Piece(ChessBoard chessBoard, Color color)
+        {
+            ChessBoard = chessBoard;
+            Color = color;
+        }
+
         public void IncrementQnttMovies()
         {
             QnttMovies++;

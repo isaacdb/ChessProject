@@ -133,9 +133,14 @@ namespace ChessProject.Chess
         }
         public void PutPieces()
         {
+            PutNewPiece('h', 7, new Tower(ChessBoard, Color.Branca));
             PutNewPiece('c', 1, new Tower(ChessBoard, Color.Branca));
-            PutNewPiece('c', 7, new King(ChessBoard, Color.Preta));
-            PutNewPiece('h', 7, new King(ChessBoard, Color.Branca));
+            PutNewPiece('b', 8, new King(ChessBoard, Color.Preta));
+            PutNewPiece('b', 3, new Queen(ChessBoard, Color.Preta));
+            PutNewPiece('a', 5, new Horse(ChessBoard, Color.Preta));
+            PutNewPiece('d', 1, new King(ChessBoard, Color.Branca));
+            PutNewPiece('d', 7, new Pawn(ChessBoard, Color.Preta));
+            PutNewPiece('d', 2, new Pawn(ChessBoard, Color.Branca));
         }
         private Piece King(Color color)
         {
@@ -162,10 +167,11 @@ namespace ChessProject.Chess
                     {
                         if (mat[i, j])
                         {
+                            Position origin = x.Position;
                             Position destino = new Position(i, j);
-                            Piece pieceCpt = RunMoviment(x.Position, destino);
+                            Piece pieceCpt = RunMoviment(origin, destino);
                             bool testCheck = OnCheck(color);
-                            UndoMoviment(x.Position, destino, pieceCpt);
+                            UndoMoviment(origin, destino, pieceCpt);
                             if (!testCheck)
                             {
                                 return false;

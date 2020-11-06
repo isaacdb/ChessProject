@@ -41,6 +41,8 @@ namespace ChessProject
                     }
 
                 }
+                Console.Clear();
+                Screen.PrintGame(game);
             }
             catch(BoardException e)
             {

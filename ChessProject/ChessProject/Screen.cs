@@ -50,8 +50,8 @@ namespace ChessProject
         public static ChessPosition ReadPlayerInput()
         {
             string s = Console.ReadLine();
-            
-            
+
+
             char column = s[0];
             int line = int.Parse(s[1] + "");
             return new ChessPosition(column, line);
@@ -62,10 +62,18 @@ namespace ChessProject
             Console.WriteLine();
             PrintCapturedPieces(game);
             Console.WriteLine();
-            Console.WriteLine("Shift: "+game.Shift);
-            Console.WriteLine("Waiting move: "+game.CurrentPlayer);
-            if(game.GameInCheck)
-                Console.WriteLine("Check!");
+            Console.WriteLine("Shift: " + game.Shift);
+            if (!game.Finished)
+            {
+                Console.WriteLine("Waiting move: " + game.CurrentPlayer);
+                if (game.GameInCheck)
+                    Console.WriteLine("Check!");
+            }
+            else
+            {
+                Console.WriteLine("XEQUEMATE!");
+                Console.WriteLine("Winner: "+game.CurrentPlayer);
+            }
         }
         public static void PrintCapturedPieces(ChessGame game)
         {
@@ -84,7 +92,7 @@ namespace ChessProject
         public static void PrintSet(HashSet<Piece> set)
         {
             Console.Write("[");
-            foreach(Piece x in set)
+            foreach (Piece x in set)
             {
                 Console.Write(x + " ");
             }
