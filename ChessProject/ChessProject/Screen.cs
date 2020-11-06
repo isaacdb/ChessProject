@@ -61,11 +61,11 @@ namespace ChessProject
             if (!input.Length.Equals(2))
                 throw new BoardException("Insert a valid position.");
 
-            List<char> letters = new List<char> { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h' };
-            List<int> numbers = new List<int> { '1', '2', '3', '4', '5', '6', '7', '8' };
+            List<char?> letters = new List<char?> { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h' };
+            List<char> numbers = new List<char> { '1', '2', '3', '4', '5', '6', '7', '8' };
 
-            var newletter = letters.FirstOrDefault(l => l.Equals(input[0]));
-            if (newletter.Equals('\0'))
+            var newletter = letters.FirstOrDefault(l => l.Equals(input[0])) ?? 'p' ;
+            if (newletter.Equals('p'))
                 throw new BoardException("Insert a valid position.");
 
             var newNumb = numbers.FirstOrDefault(n => n.Equals(input[1]));
