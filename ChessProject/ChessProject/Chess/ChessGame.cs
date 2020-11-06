@@ -36,6 +36,22 @@ namespace ChessProject.Chess
                 UndoMoviment(origin, destiny, captPiece);
                 throw new BoardException("You can't put yourself in check");
             }
+            Piece p = ChessBoard.PiecePosition(destiny);
+            //#jogada especial promocao
+            if(p is Pawn)
+            {
+                if((p.Color == Color.Branca && destiny.Line == 0) || (p.Color == Color.Preta && destiny.Line == 8))
+                {
+                    p = ChessBoard.RemovePiece(destiny);
+                    FreePieces.Remove(p);
+                    Piece queen = new Queen(ChessBoard, p.Color);
+                    ChessBoard.InsertPiece(queen, destiny);
+                    FreePieces.Add(queen);
+
+                }
+            }
+            //
+
             if (OnCheck(adversary(CurrentPlayer)))
                 GameInCheck = true;
             else
@@ -50,7 +66,6 @@ namespace ChessProject.Chess
                 Shift++;
                 ChangePlayer();
             }
-            Piece p = ChessBoard.PiecePosition(destiny);
             //#jogada especial EnPassant
             if (p is Pawn && (destiny.Line == origin.Line - 2 || destiny.Line == origin.Line + 2))
                 VulnerableForEnPassant = p;
