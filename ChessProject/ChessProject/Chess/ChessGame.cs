@@ -1,6 +1,7 @@
 ﻿using ChessProject.Board;
 using Microsoft.VisualBasic;
 using System.Collections.Generic;
+using System.ComponentModel;
 
 namespace ChessProject.Chess
 {
@@ -14,6 +15,7 @@ namespace ChessProject.Chess
         public HashSet<Piece> CapturedPieces { get; set; }
 
         public bool GameInCheck { get; set; }
+        public Piece VulnerableForEnPassant { get; private set; }
 
         public ChessGame()
         {
@@ -23,6 +25,7 @@ namespace ChessProject.Chess
             Finished = false;
             FreePieces = new HashSet<Piece>();
             CapturedPieces = new HashSet<Piece>();
+            VulnerableForEnPassant = null;
             PutPieces();
         }
         public void PerformsMove(Position origin, Position destiny)
@@ -47,6 +50,12 @@ namespace ChessProject.Chess
                 Shift++;
                 ChangePlayer();
             }
+            Piece p = ChessBoard.PiecePosition(destiny);
+            //#jogada especial EnPassant
+            if (p is Pawn && (destiny.Line == origin.Line - 2 || destiny.Line == origin.Line + 2))
+                VulnerableForEnPassant = p;
+            else
+                VulnerableForEnPassant = null;
         }
         private Color adversary(Color color)
         {
@@ -111,6 +120,19 @@ namespace ChessProject.Chess
                 T.DecrementQnttMovies();
                 ChessBoard.InsertPiece(T, originT);
             }
+            //#jogada especial EnPassant
+            if (p is Pawn)
+            {
+                if (origin.Column != destiny.Column && captPiece == VulnerableForEnPassant)
+                {
+                    Piece pawn = ChessBoard.RemovePiece(destiny);
+                    Position posP;
+                    if (p.Color == Color.Branca)
+                        posP = new Position(3, destiny.Column);
+                    else
+                        posP = new Position(4, destiny.Column);
+                }
+            }
 
         }
         public Piece RunMoviment(Position origin, Position destiny)
@@ -123,7 +145,7 @@ namespace ChessProject.Chess
                 CapturedPieces.Add(CapturedPiece);
 
             //#jogada especial roque pequeno
-            if(p is King && destiny.Column == origin.Column + 2)
+            if (p is King && destiny.Column == origin.Column + 2)
             {
                 Position originT = new Position(origin.Line, origin.Column + 3);
                 Position destinyT = new Position(origin.Line, origin.Column + 1);
@@ -139,6 +161,21 @@ namespace ChessProject.Chess
                 Piece T = ChessBoard.RemovePiece(originT);
                 T.IncrementQnttMovies();
                 ChessBoard.InsertPiece(T, destinyT);
+            }
+            //#jogada especial EnPassant
+            if (p is Pawn)
+            {
+                if (origin.Column != destiny.Column && CapturedPiece == null)
+                {
+                    Position posP;
+                    if (p.Color == Color.Branca)
+                        posP = new Position(destiny.Line + 1, destiny.Column);
+                    else
+                        posP = new Position(destiny.Line - 1, destiny.Column);
+
+                    CapturedPiece = ChessBoard.RemovePiece(posP);
+                    CapturedPieces.Add(CapturedPiece);
+                }
             }
 
             return CapturedPiece;
@@ -174,10 +211,21 @@ namespace ChessProject.Chess
         {
             PutNewPiece('h', 8, new Tower(ChessBoard, Color.Preta));
             PutNewPiece('a', 8, new Tower(ChessBoard, Color.Preta));
-            PutNewPiece('e', 8, new King(ChessBoard, Color.Preta,this));
+            PutNewPiece('e', 8, new King(ChessBoard, Color.Preta, this));
             PutNewPiece('e', 1, new King(ChessBoard, Color.Branca, this));
             PutNewPiece('h', 1, new Tower(ChessBoard, Color.Branca));
             PutNewPiece('a', 1, new Tower(ChessBoard, Color.Branca));
+
+            PutNewPiece('a', 2, new Pawn(ChessBoard, Color.Branca, this));
+            PutNewPiece('b', 2, new Pawn(ChessBoard, Color.Branca, this));
+            PutNewPiece('c', 2, new Pawn(ChessBoard, Color.Branca, this));
+            PutNewPiece('d', 2, new Pawn(ChessBoard, Color.Branca, this));
+
+            PutNewPiece('a', 7, new Pawn(ChessBoard, Color.Preta, this));
+            PutNewPiece('b', 7, new Pawn(ChessBoard, Color.Preta, this));
+            PutNewPiece('c', 7, new Pawn(ChessBoard, Color.Preta, this));
+            PutNewPiece('d', 7, new Pawn(ChessBoard, Color.Preta, this));
+
         }
         private Piece King(Color color)
         {
