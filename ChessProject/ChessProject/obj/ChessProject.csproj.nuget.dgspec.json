@@ -1,20 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\CursoCSharp\\ChessProject\\ChessProject\\ChessProject\\ChessProject.csproj": {}
+    "D:\\Documentos Hd\\CursoCSharp\\ChessProject\\ChessProject\\ChessProject\\ChessProject.csproj": {}
   },
   "projects": {
-    "C:\\CursoCSharp\\ChessProject\\ChessProject\\ChessProject\\ChessProject.csproj": {
+    "D:\\Documentos Hd\\CursoCSharp\\ChessProject\\ChessProject\\ChessProject\\ChessProject.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\CursoCSharp\\ChessProject\\ChessProject\\ChessProject\\ChessProject.csproj",
+        "projectUniqueName": "D:\\Documentos Hd\\CursoCSharp\\ChessProject\\ChessProject\\ChessProject\\ChessProject.csproj",
         "projectName": "ChessProject",
-        "projectPath": "C:\\CursoCSharp\\ChessProject\\ChessProject\\ChessProject\\ChessProject.csproj",
-        "packagesPath": "C:\\Users\\isaac.debiasi\\.nuget\\packages\\",
-        "outputPath": "C:\\CursoCSharp\\ChessProject\\ChessProject\\ChessProject\\obj\\",
+        "projectPath": "D:\\Documentos Hd\\CursoCSharp\\ChessProject\\ChessProject\\ChessProject\\ChessProject.csproj",
+        "packagesPath": "C:\\Users\\Isaac\\.nuget\\packages\\",
+        "outputPath": "D:\\Documentos Hd\\CursoCSharp\\ChessProject\\ChessProject\\ChessProject\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
         "configFilePaths": [
-          "C:\\Users\\isaac.debiasi\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Isaac\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [

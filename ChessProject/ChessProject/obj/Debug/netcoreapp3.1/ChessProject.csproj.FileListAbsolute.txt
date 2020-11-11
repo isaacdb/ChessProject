@@ -11,3 +11,16 @@ C:\CursoCSharp\ChessProject\ChessProject\ChessProject\obj\Debug\netcoreapp3.1\Ch
 C:\CursoCSharp\ChessProject\ChessProject\ChessProject\obj\Debug\netcoreapp3.1\ChessProject.dll
 C:\CursoCSharp\ChessProject\ChessProject\ChessProject\obj\Debug\netcoreapp3.1\ChessProject.pdb
 C:\CursoCSharp\ChessProject\ChessProject\ChessProject\obj\Debug\netcoreapp3.1\ChessProject.genruntimeconfig.cache
+D:\Documentos Hd\CursoCSharp\ChessProject\ChessProject\ChessProject\bin\Debug\netcoreapp3.1\ChessProject.exe
+D:\Documentos Hd\CursoCSharp\ChessProject\ChessProject\ChessProject\bin\Debug\netcoreapp3.1\ChessProject.deps.json
+D:\Documentos Hd\CursoCSharp\ChessProject\ChessProject\ChessProject\bin\Debug\netcoreapp3.1\ChessProject.runtimeconfig.json
+D:\Documentos Hd\CursoCSharp\ChessProject\ChessProject\ChessProject\bin\Debug\netcoreapp3.1\ChessProject.runtimeconfig.dev.json
+D:\Documentos Hd\CursoCSharp\ChessProject\ChessProject\ChessProject\bin\Debug\netcoreapp3.1\ChessProject.dll
+D:\Documentos Hd\CursoCSharp\ChessProject\ChessProject\ChessProject\bin\Debug\netcoreapp3.1\ChessProject.pdb
+D:\Documentos Hd\CursoCSharp\ChessProject\ChessProject\ChessProject\obj\Debug\netcoreapp3.1\ChessProject.csprojAssemblyReference.cache
+D:\Documentos Hd\CursoCSharp\ChessProject\ChessProject\ChessProject\obj\Debug\netcoreapp3.1\ChessProject.AssemblyInfoInputs.cache
+D:\Documentos Hd\CursoCSharp\ChessProject\ChessProject\ChessProject\obj\Debug\netcoreapp3.1\ChessProject.AssemblyInfo.cs
+D:\Documentos Hd\CursoCSharp\ChessProject\ChessProject\ChessProject\obj\Debug\netcoreapp3.1\ChessProject.csproj.CoreCompileInputs.cache
+D:\Documentos Hd\CursoCSharp\ChessProject\ChessProject\ChessProject\obj\Debug\netcoreapp3.1\ChessProject.dll
+D:\Documentos Hd\CursoCSharp\ChessProject\ChessProject\ChessProject\obj\Debug\netcoreapp3.1\ChessProject.pdb
+D:\Documentos Hd\CursoCSharp\ChessProject\ChessProject\ChessProject\obj\Debug\netcoreapp3.1\ChessProject.genruntimeconfig.cache
